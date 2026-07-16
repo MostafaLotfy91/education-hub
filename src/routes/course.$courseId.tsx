@@ -21,7 +21,7 @@ function CourseDetail() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("courses")
-        .select("*, profiles:instructor_id(full_name)")
+        .select("*, instructor:profiles!courses_instructor_id_fkey(full_name)")
         .eq("id", courseId)
         .eq("status", "published")
         .maybeSingle();
@@ -91,7 +91,7 @@ function CourseDetail() {
             <p className="mt-3 text-lg text-muted-foreground">{course.description}</p>
             <p className="mt-3 text-sm text-muted-foreground">
               Instructor: <span className="font-medium text-foreground">
-                {(course as any).profiles?.full_name ?? "Instructor"}
+                {(course as any).instructor?.full_name ?? "Instructor"}
               </span>
             </p>
 
