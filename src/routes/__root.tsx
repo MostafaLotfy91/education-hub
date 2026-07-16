@@ -75,6 +75,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Discover expert-led online courses in web development, design, data, business and more." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Hub Education — Learn without limits" },
+      { name: "twitter:description", content: "Discover expert-led online courses in web development, design, data, business and more." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/54c70385-365d-4e7a-a0ff-f066f86d78ef" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/54c70385-365d-4e7a-a0ff-f066f86d78ef" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
