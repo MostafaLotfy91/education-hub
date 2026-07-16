@@ -132,10 +132,9 @@ function ManageCourse() {
                 <Button size="icon" variant="ghost" onClick={() => move(i, 1)} disabled={i === lessons.length - 1}><ArrowDown className="h-4 w-4" /></Button>
               </div>
               <Input
-                value={l.title}
-                onChange={(e) => refetchLessons()} // no-op live; blur to save
-                onBlur={(e) => e.target.value !== l.title && updateLesson(l.id, { title: e.target.value })}
+                key={l.id + l.title}
                 defaultValue={l.title}
+                onBlur={(e) => e.target.value !== l.title && updateLesson(l.id, { title: e.target.value })}
                 className="flex-1"
               />
               <label className="flex items-center gap-2 text-sm">
