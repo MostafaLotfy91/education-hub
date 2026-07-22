@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
 import { Loader2 } from "lucide-react";
 
-export const Route = createFileRoute("/_authenticated/instructor")({
+export const Route = createFileRoute("/_authenticated/admin")({
   beforeLoad: async () => {
     // Get current user session
     const { data: userData, error: userError } = await supabase.auth.getUser();
@@ -26,18 +26,18 @@ export const Route = createFileRoute("/_authenticated/instructor")({
       throw redirect({ to: "/" });
     }
 
-    // If user is not instructor or admin, redirect to home (not logout)
-    if (profileData.role !== "instructor" && profileData.role !== "admin") {
+    // If user is not admin, redirect to home (not logout)
+    if (profileData.role !== "admin") {
       throw redirect({ to: "/" });
     }
 
-    // User is authenticated and has instructor role - allow access
+    // User is authenticated and is an admin - allow access
     return {};
   },
-  component: InstructorLayout,
+  component: AdminLayout,
 });
 
-function InstructorLayout() {
+function AdminLayout() {
   const { user } = useAuth();
 
   // Fetch user role with loading state
@@ -62,14 +62,14 @@ function InstructorLayout() {
       <div className="flex h-screen items-center justify-center">
         <div className="text-center">
           <Loader2 className="mx-auto h-8 w-8 animate-spin text-primary" />
-          <p className="mt-4 text-sm text-muted-foreground">Loading instructor panel...</p>
+          <p className="mt-4 text-sm text-muted-foreground">Loading admin panel...</p>
         </div>
       </div>
     );
   }
 
-  // Double-check role is instructor or admin (should be caught by beforeLoad, but safety check)
-  if (userRole !== "instructor" && userRole !== "admin") {
+  // Double-check role is admin (should be caught by beforeLoad, but safety check)
+  if (userRole !== "admin") {
     return (
       <div className="flex h-screen items-center justify-center">
         <div className="text-center">
